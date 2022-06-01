@@ -11,9 +11,19 @@ namespace TestThing.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly string[] ColdSummaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing", "Bracing", "Chilly"
+        };
+
+        private static readonly string[] MidSummaries = new[]
+{
+            "Cool", "Mild", "Warm", "Balmy"
+        };
+
+        private static readonly string[] HotSummaries = new[]
+{
+             "Hot", "Sweltering", "Scorching"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
@@ -31,8 +41,13 @@ namespace TestThing.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
+
+                Summary = ColdSummaries[rng.Next(ColdSummaries.Length)]
+            }
+
+                //THIS IS WHERE IM STUCK
+
+            )
             .ToArray();
         }
     }
