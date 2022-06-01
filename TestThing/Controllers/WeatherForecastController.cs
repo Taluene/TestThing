@@ -37,18 +37,29 @@ namespace TestThing.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-
-                Summary = ColdSummaries[rng.Next(ColdSummaries.Length)]
+            
+            for (int i = 0; i<=5; i++){
+                var tempTemp = rng.Next(-20, 55),
+                var forecast = new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(i),
+                    TemperatureC = tempTemp
+                    
+                     
+                    
+                    Summary = DetermineSummary(tempTemp)
+                }               
+                yield return forecast
             }
+            
 
-                //THIS IS WHERE IM STUCK
-
-            )
-            .ToArray();
         }
+        
+        private string DetermineSummary(int temp)
+        {
+            if temp hjasdjhasdfjhasdfjhkasdf
+        
+        }
+        
     }
 }
