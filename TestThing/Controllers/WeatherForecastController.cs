@@ -39,17 +39,17 @@ namespace TestThing.Controllers
             var rng = new Random();
             
             for (int i = 0; i<=5; i++){
-                var tempTemp = rng.Next(-20, 55),
+                var tempTemp = rng.Next(-20, 55);
                 var forecast = new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(i),
-                    TemperatureC = tempTemp
-                    
-                     
-                    
+                    TemperatureC = tempTemp,
+
+
                     Summary = DetermineSummary(tempTemp)
-                }               
-                yield return forecast
+
+                };
+                yield return forecast;
             }
             
 
@@ -57,8 +57,17 @@ namespace TestThing.Controllers
         
         private string DetermineSummary(int temp)
         {
-            if temp hjasdjhasdfjhasdfjhkasdf
-        
+            var rng = new Random();
+            
+            if (temp >= 40){
+                return HotSummaries[rng.Next(HotSummaries.Length)];
+            }
+            if (temp <= 39 && temp >= 10)
+            {
+                return MidSummaries[rng.Next(MidSummaries.Length)];
+            }
+            else return ColdSummaries[rng.Next(ColdSummaries.Length)];
+
         }
         
     }
