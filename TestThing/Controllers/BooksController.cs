@@ -40,16 +40,18 @@ namespace TestThing.Controllers
             return book;
         }
 
-        //[HttpGet]
-        //public ActionResult<IEnumerable<Book>> GetDatBook()
-        //{
-        //    var book = books.FirstOrDefault(x => x.Id = 1);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return book;
-        //}
+        [HttpGet("getdatbook")]
+ 
+
+        public ActionResult<IEnumerable<Book>> GetDatBook()
+        {
+            var book = books.Where(x => x.PublicationYear >= 2000);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return book.ToList();
+        }
 
 
 
@@ -60,8 +62,11 @@ namespace TestThing.Controllers
             books.Add(
             new Book { Id = id, Title = title, Author = author, PublicationYear = publicationYear, IsAvailable = isAvailable, CallNumber = callNumber }
             );
+
+            //throwing an error if any are null 
+            //
             return books;
         }
       
-    }
+    } //Write some unit tests valid publication years and such, validate on author name, character limits
 }
