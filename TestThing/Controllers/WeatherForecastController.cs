@@ -40,13 +40,16 @@ namespace TestThing.Controllers
             
             for (int i = 0; i<=5; i++){
                 var tempTemp = rng.Next(-20, 55);
-                var forecast = new WeatherForecast
+                var tempHum = rng.Next(0, 100);
+                var forecast = new WeatherForecast 
                 {
                     Date = DateTime.Now.AddDays(i),
                     TemperatureC = tempTemp,
+                    Humidity = tempHum,
 
 
-                    Summary = DetermineSummary(tempTemp)
+                    TempSummary = DetermineTempSummary(tempTemp),
+                    HumSummary = DetermineHumSummary(tempHum)
 
                 };
                 yield return forecast;
@@ -55,20 +58,41 @@ namespace TestThing.Controllers
 
         }
         
-        private string DetermineSummary(int temp)
+        private string DetermineTempSummary(int temp)
         {
             var rng = new Random();
+            var sumResult = string.Empty; 
             
             if (temp >= 40){
-                return HotSummaries[rng.Next(HotSummaries.Length)];
+                sumResult = HotSummaries[rng.Next(HotSummaries.Length)];
             }
-            if (temp <= 39 && temp >= 10)
+            else if (temp <= 39 && temp >= 10)
             {
-                return MidSummaries[rng.Next(MidSummaries.Length)];
+                sumResult = MidSummaries[rng.Next(MidSummaries.Length)];
             }
-            else return ColdSummaries[rng.Next(ColdSummaries.Length)];
+            else sumResult = ColdSummaries[rng.Next(ColdSummaries.Length)];
 
+            return sumResult;
         }
-        
+
+        private string DetermineHumSummary(int hum)
+        {
+
+        var rng = new Random();
+            var sumResult = string.Empty;
+
+            if (hum >= 70)
+            {
+                sumResult = "Tropical";
+            }
+            else if (hum <= 69 && hum >= 30)
+            {
+                sumResult = "Fairly Humid";
+            }
+            else sumResult = "Dry";
+
+            return sumResult;
+        }
+
     }
 }
